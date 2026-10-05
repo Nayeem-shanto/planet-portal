@@ -1,0 +1,75 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: false;
+}
+
+/* Custom daisyUI theme: forest, moss and a sunlight accent */
+@plugin "daisyui/theme" {
+  name: "planet";
+  default: true;
+  color-scheme: light;
+  --color-base-100: #ffffff;
+  --color-base-200: #f1f5ef;
+  --color-base-300: #dfe7da;
+  --color-base-content: #1b2a21;
+  --color-primary: #1e3a2b;
+  --color-primary-content: #eef6e6;
+  --color-secondary: #3f7d4e;
+  --color-secondary-content: #ffffff;
+  --color-accent: #9bc53d;
+  --color-accent-content: #16260e;
+  --color-neutral: #24332a;
+  --color-neutral-content: #e7eee3;
+  --color-info: #2f7ea8;
+  --color-info-content: #ffffff;
+  --color-success: #2f8a55;
+  --color-success-content: #ffffff;
+  --color-warning: #d99a1e;
+  --color-warning-content: #2a1d00;
+  --color-error: #c2453b;
+  --color-error-content: #ffffff;
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 0.875rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@theme {
+  --font-sans: "Figtree", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Figtree", ui-sans-serif, sans-serif;
+}
+
+body {
+  @apply bg-base-200 text-base-content antialiased;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+}
+
+/* Thin scrollbars for the split job view */
+.thin-scroll { scrollbar-width: thin; }
+
+/* Contour-line drawing animation on the sign-in screen */
+@keyframes draw {
+  from { stroke-dashoffset: 1400; }
+  to { stroke-dashoffset: 0; }
+}
+.contour path {
+  stroke-dasharray: 1400;
+  animation: draw 3.2s ease-out forwards;
+}
+@media (prefers-reduced-motion: reduce) {
+  .contour path { animation: none; stroke-dasharray: none; }
+}
+
+/* The CV is printed on its own: hide the app around it */
+@media print {
+  body * { visibility: hidden; }
+  #cv-print, #cv-print * { visibility: visible; }
+  #cv-print { position: absolute; inset: 0; box-shadow: none !important; border: 0 !important; }
+  @page { size: A4; margin: 14mm; }
+}
